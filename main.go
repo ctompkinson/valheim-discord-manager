@@ -42,6 +42,19 @@ func main() {
 }
 
 func getMessageHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
+
+	found := false
+	for _, role := range m.Member.Roles {
+		if role == "763472752493461504" {
+			found = true
+		}
+	}
+	if !found {
+		s.ChannelMessageSend(m.ChannelID, "You are not a godmin!")
+		return
+	}
+
+
 	if !strings.Contains(m.Message.Content, "!valheim") {
 		return
 	}
