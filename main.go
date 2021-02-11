@@ -50,7 +50,7 @@ func getMessageHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
 		}
 	}
 	if !found {
-		s.ChannelMessageSend(m.ChannelID, "You are not a godmin!")
+		s.ChannelMessageSend(m.ChannelID, "You are not a Regional Manager, get out!")
 		return
 	}
 
