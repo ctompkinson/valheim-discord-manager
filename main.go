@@ -45,7 +45,7 @@ func getMessageHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 	found := false
 	for _, role := range m.Member.Roles {
-		if role == "763472752493461504" {
+		if role == "809546453324267531" {
 			found = true
 		}
 	}
