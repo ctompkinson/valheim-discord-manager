@@ -72,11 +72,6 @@ func getMessageHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
 			Args:         []string{"start"},
 			Dir:          "/home/vhserver",
 		}
-		if err := cmd.Start(); err != nil {
-			log.Println(err)
-			s.ChannelMessageSend(m.ChannelID, err.Error())
-			return
-		}
 		stdout, err := cmd.Output()
 		if err != nil {
 			log.Println(err)
@@ -93,11 +88,6 @@ func getMessageHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
 			Args:         []string{"stop"},
 			Dir:          "/home/vhserver",
 		}
-		if err := cmd.Start(); err != nil {
-			log.Println(err)
-			s.ChannelMessageSend(m.ChannelID, err.Error())
-			return
-		}
 		stdout, err := cmd.Output()
 		if err != nil {
 			log.Println(err)
@@ -113,11 +103,6 @@ func getMessageHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
 			Path:         "vhserver",
 			Args:         []string{"details"},
 			Dir:          "/home/vhserver",
-		}
-		if err := cmd.Start(); err != nil {
-			log.Println(err)
-			s.ChannelMessageSend(m.ChannelID, err.Error())
-			return
 		}
 		stdout, err := cmd.Output()
 		if err != nil {
