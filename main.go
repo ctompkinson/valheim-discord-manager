@@ -42,6 +42,9 @@ func main() {
 }
 
 func getMessageHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
+	if m.Author.ID == s.State.User.ID {
+		return
+	}
 
 	found := false
 	for _, role := range m.Member.Roles {
