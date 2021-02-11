@@ -67,34 +67,19 @@ func getMessageHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
 	switch parts[1] {
 	case "start":
 		output, err := exec.Command("/home/vhserver/vhserver", "start").Output()
-		if err != nil {
-			log.Println(err)
-			s.ChannelMessageSend(m.ChannelID, err.Error())
-			return
-		}
-
+		log.Println(err)
 		log.Println(string(output))
 		s.ChannelMessageSend(m.ChannelID, string(output))
 
 	case "stop":
 		output, err := exec.Command("/home/vhserver/vhserver", "stop").Output()
-		if err != nil {
-			log.Println(err)
-			s.ChannelMessageSend(m.ChannelID, err.Error())
-			return
-		}
-
+		log.Println(err)
 		log.Println(string(output))
 		s.ChannelMessageSend(m.ChannelID, string(output))
 
 	case "status":
 		output, err := exec.Command("/home/vhserver/vhserver", "details").Output()
-		if err != nil {
-			log.Println(err)
-			s.ChannelMessageSend(m.ChannelID, err.Error())
-			return
-		}
-
+		log.Println(err)
 		log.Println(string(output))
 		s.ChannelMessageSend(m.ChannelID, string(output))
 
