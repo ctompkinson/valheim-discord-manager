@@ -46,6 +46,10 @@ func getMessageHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
 		return
 	}
 
+	if !strings.Contains(m.Message.Content, "!valheim") {
+		return
+	}
+
 	found := false
 	for _, role := range m.Member.Roles {
 		if role == "809546453324267531" {
@@ -57,10 +61,6 @@ func getMessageHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
 		return
 	}
 
-
-	if !strings.Contains(m.Message.Content, "!valheim") {
-		return
-	}
 
 	parts := strings.Split(m.Message.Content, " ")
 	if len(parts) == 1 {
