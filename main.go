@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"github.com/bwmarrin/discordgo"
 	"log"
 	"os"
@@ -67,52 +66,37 @@ func getMessageHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 	switch parts[1] {
 	case "start":
-		cmd := exec.Cmd{
-			Path:         "vhserver",
-			Args:         []string{"start"},
-			Dir:          "/home/vhserver",
-		}
-		stdout, err := cmd.Output()
+		output, err := exec.Command("/home/vhserver/vhserver", "start").Output()
 		if err != nil {
 			log.Println(err)
 			s.ChannelMessageSend(m.ChannelID, err.Error())
 			return
 		}
 
-		log.Println(stdout)
-		s.ChannelMessageSend(m.ChannelID, fmt.Sprintf("Server Started: %s", stdout))
+		log.Println(string(output))
+		s.ChannelMessageSend(m.ChannelID, string(output))
 
 	case "stop":
-		cmd := exec.Cmd{
-			Path:         "vhserver",
-			Args:         []string{"stop"},
-			Dir:          "/home/vhserver",
-		}
-		stdout, err := cmd.Output()
+		output, err := exec.Command("/home/vhserver/vhserver", "stop").Output()
 		if err != nil {
 			log.Println(err)
 			s.ChannelMessageSend(m.ChannelID, err.Error())
 			return
 		}
 
-		log.Println(stdout)
-		s.ChannelMessageSend(m.ChannelID, fmt.Sprintf("Server Stopped: %s", stdout))
+		log.Println(string(output))
+		s.ChannelMessageSend(m.ChannelID, string(output))
 
 	case "status":
-		cmd := exec.Cmd{
-			Path:         "vhserver",
-			Args:         []string{"details"},
-			Dir:          "/home/vhserver",
-		}
-		stdout, err := cmd.Output()
+		output, err := exec.Command("/home/vhserver/vhserver", "details").Output()
 		if err != nil {
 			log.Println(err)
 			s.ChannelMessageSend(m.ChannelID, err.Error())
 			return
 		}
 
-		log.Println(stdout)
-		s.ChannelMessageSend(m.ChannelID, string(stdout))
+		log.Println(string(output))
+		s.ChannelMessageSend(m.ChannelID, string(output))
 
 	default:
 		s.ChannelMessageSend(m.ChannelID, "Must use start, stop or status")
