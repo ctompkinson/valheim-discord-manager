@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"github.com/bwmarrin/discordgo"
 	"log"
 	"os"
@@ -69,19 +70,19 @@ func getMessageHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
 		output, err := exec.Command("/home/vhserver/vhserver", "start").Output()
 		log.Println(err)
 		log.Println(string(output))
-		s.ChannelMessageSend(m.ChannelID, string(output))
+		s.ChannelMessageSend(m.ChannelID, fmt.Sprintf("%s\n%s\n", output, err))
 
 	case "stop":
 		output, err := exec.Command("/home/vhserver/vhserver", "stop").Output()
 		log.Println(err)
 		log.Println(string(output))
-		s.ChannelMessageSend(m.ChannelID, string(output))
+		s.ChannelMessageSend(m.ChannelID, fmt.Sprintf("%s\n%s\n", output, err))
 
 	case "status":
 		output, err := exec.Command("/home/vhserver/vhserver", "details").Output()
 		log.Println(err)
 		log.Println(string(output))
-		s.ChannelMessageSend(m.ChannelID, string(output))
+		s.ChannelMessageSend(m.ChannelID, fmt.Sprintf("%s\n%s\n", output, err))
 
 	default:
 		s.ChannelMessageSend(m.ChannelID, "Must use start, stop or status")
